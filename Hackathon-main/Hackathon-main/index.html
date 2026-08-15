@@ -7,15 +7,54 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="booking-shell">
+    <header class="booking-header">
+      <div class="container topbar">
+        <div class="brand-mark" aria-label="Centennial Eco-Kiosk brand">
+          <span class="brand-icon">🌱</span>
+          <span class="brand-text">Centennial Eco-Kiosk</span>
+        </div>
 
-  <div class="kiosk-container">
-    <header class="kiosk-header">
-      <h1>🌱 Centennial Eco-Kiosk</h1>
-      <p>Progress Campus — Real-time Room Directory & Seat Reservation</p>
+        <nav class="utility-nav" aria-label="Utility menu">
+          <button type="button" class="nav-pill nav-action">USD</button>
+          <button type="button" class="nav-pill nav-action">EN</button>
+          <button type="button" class="nav-pill nav-link">Help</button>
+          <button type="button" class="nav-pill nav-outline">Sign in</button>
+          <button type="button" class="nav-pill nav-primary">Register</button>
+        </nav>
+      </div>
+
+      <div class="container hero-wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">Campus access</p>
+          <h1>🌱 Centennial Eco-Kiosk</h1>
+          <p>Progress Campus — Real-time Room Directory & Seat Reservation</p>
+        </div>
+      </div>
+
+      <div class="container search-shell-wrap">
+        <div class="search-shell" aria-label="Search and booking filters">
+          <div class="search-section">
+            <span class="section-label">Location</span>
+            <span class="section-value">Progress Campus</span>
+          </div>
+          <div class="search-section">
+            <span class="section-label">Check-in</span>
+            <span class="section-value">Today</span>
+          </div>
+          <div class="search-section">
+            <span class="section-label">Guests</span>
+            <span class="section-value">1 guest</span>
+          </div>
+          <button type="button" class="search-button">Search</button>
+        </div>
+      </div>
     </header>
 
-    <!-- Rooms will dynamically render here -->
-    <div id="room-list" class="room-grid"></div>
+    <main class="page-main container">
+      <!-- Rooms will dynamically render here -->
+      <div id="room-list" class="room-grid" aria-live="polite"></div>
+    </main>
   </div>
 
   <!-- Reservation Modal -->
