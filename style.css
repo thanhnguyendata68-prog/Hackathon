@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    background-color: #f0f4f1; /* Light mint/grey tint matching eco-kiosk feel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Kiosk Trigger Button - Main Color */
+.kiosk-btn {
+    background-color: yellowgreen; /* Main Color */
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 18px 32px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 102, 51, 0.3);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.kiosk-btn:active {
+    transform: scale(0.97);
+    background-color: #7ab619; /* Darker yellowgreen */
+}
+
+/* Modal Backdrop Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 25, 15, 0.65); /* Dark green-tinted backdrop */
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Active Modal State */
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Modal Container with Main Color Accent Bar */
+.modal-card {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 550px;
+    padding: 36px;
+    border-radius: 20px;
+    border-top: 8px solid yellowgreen; /* Brand accent top border */
+    box-shadow: 0 16px 36px rgba(0, 50, 20, 0.25);
+    transform: translateY(20px);
+    transition: transform 0.25s ease-in-out;
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+/* Modal Content Header */
+.modal-header {
+    margin-bottom: 24px;
+}
+
+.modal-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #7ab619; /* Dark yellowgreen */
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+}
+
+.modal-subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #556655;
+    margin: 0;
+}
+
+/* Touch-Friendly Form Controls */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #003319;
+    margin-bottom: 8px;
+}
+
+.touch-input, 
+.touch-select {
+    width: 100%;
+    height: 58px; /* Large touch area */
+    font-size: 1.15rem;
+    font-weight: 500;
+    padding: 0 18px;
+    border: 2px solid #c2d6cc;
+    border-radius: 12px;
+    background-color: #f9fbf9;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.touch-input:focus, 
+.touch-select:focus {
+    border-color: yellowgreen; /* Focus ring main color */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 102, 51, 0.15);
+}
+
+/* Action Button Group */
+.modal-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.btn-action {
+    flex: 1;
+    height: 62px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #e5ebe7;
+    color: #334433;
+}
+
+.btn-cancel:active {
+    background-color: #d0ded4;
+}
+
+/* Primary Confirm Button - Main Color with Gold Touch Effect */
+.btn-confirm {
+    background-color: yellowgreen;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 102, 51, 0.25);
+}
+
+.btn-confirm:active {
+    background-color: #7ab619;
+    border-bottom: 3px solid #ffcc00; /* Gold active indicator */
+}
+
+.btn-action:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Touchscreen Kiosk - Reserve Seat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Kiosk Room Card Trigger -->
+  <button class="kiosk-btn" onclick="openModal()">Reserve Seat in E201</button>
+
+  <!-- Reservation Modal -->
+  <div class="modal-overlay" id="reservationModal">
+    <div class="modal-card">
+      
+      <div class="modal-header">
+        <h2 class="modal-title">Reserve a Study Seat</h2>
+        <p class="modal-subtitle">Room E201 — Progress Campus Library</p>
+      </div>
+
+      <form id="reservationForm" onsubmit="handleReservation(event)">
+        <div class="form-group">
+          <label class="form-label" for="duration">Duration</label>
+          <select class="touch-select" id="duration" required>
+            <option value="30">30 Minutes</option>
+            <option value="60" selected>1 Hour</option>
+            <option value="120">2 Hours</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="studentId">Student ID (Optional)</label>
+          <input 
+            type="text" 
+            class="touch-input" 
+            id="studentId" 
+            placeholder="e.g. 301234567" 
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-action btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-confirm">Confirm Spot</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('reservationModal');
+
+    function openModal() {
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    function handleReservation(event) {
+      event.preventDefault();
+      
+      const duration = document.getElementById('duration').value;
+      const studentId = document.getElementById('studentId').value;
+
+      // Send payload via Fetch API to Member 1's backend endpoint
+      /*
+      fetch('http://localhost:8080/api/reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          roomId: 'E201',
+          durationMinutes: parseInt(duration),
+          studentId: studentId || null
+        })
+      });
+      */
+
+      alert(`Seat Reserved in Room E201 for ${duration} minutes!`);
+      closeModal();
+    }
+  </script>
+
+</body>
+</html>
