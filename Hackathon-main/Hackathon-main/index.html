@@ -7,54 +7,113 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="booking-shell">
-    <header class="booking-header">
-      <div class="container topbar">
-        <div class="brand-mark" aria-label="Centennial Eco-Kiosk brand">
+  <div class="eco-app">
+    <header class="eco-header">
+      <div class="app-topbar">
+        <div class="brand-row" aria-label="Centennial Eco-Kiosk brand">
           <span class="brand-icon">🌱</span>
-          <span class="brand-text">Centennial Eco-Kiosk</span>
-        </div>
-
-        <nav class="utility-nav" aria-label="Utility menu">
-          <button type="button" class="nav-pill nav-action">USD</button>
-          <button type="button" class="nav-pill nav-action">EN</button>
-          <button type="button" class="nav-pill nav-link">Help</button>
-          <button type="button" class="nav-pill nav-outline">Sign in</button>
-          <button type="button" class="nav-pill nav-primary">Register</button>
-        </nav>
-      </div>
-
-      <div class="container hero-wrap">
-        <div class="hero-copy">
-          <p class="eyebrow">Campus access</p>
-          <h1>🌱 Centennial Eco-Kiosk</h1>
-          <p>Progress Campus — Real-time Room Directory & Seat Reservation</p>
+          <div class="brand-copy">
+            <span class="brand-title">Centennial Eco-Kiosk</span>
+            <span class="brand-version">v1</span>
+          </div>
         </div>
       </div>
 
-      <div class="container search-shell-wrap">
-        <div class="search-shell" aria-label="Search and booking filters">
-          <div class="search-section">
-            <span class="section-label">Location</span>
-            <span class="section-value">Progress Campus</span>
-          </div>
-          <div class="search-section">
-            <span class="section-label">Check-in</span>
-            <span class="section-value">Today</span>
-          </div>
-          <div class="search-section">
-            <span class="section-label">Guests</span>
-            <span class="section-value">1 guest</span>
-          </div>
-          <button type="button" class="search-button">Search</button>
-        </div>
+      <div class="section-kicker">
+        <h2>Find a Room</h2>
       </div>
     </header>
 
-    <main class="page-main container">
-      <!-- Rooms will dynamically render here -->
-      <div id="room-list" class="room-grid" aria-live="polite"></div>
+    <main class="eco-main">
+      <section class="map-panel" aria-label="Campus map overview">
+        <div class="map-card">
+          <div class="map-art">
+            <span class="map-pin">📍</span>
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="route route-one"></div>
+            <div class="route route-two"></div>
+          </div>
+        </div>
+        <div class="map-label">Block L</div>
+      </section>
+
+      <section class="search-bar" aria-label="Search field">
+        <span class="search-icon">⌕</span>
+        <span class="search-placeholder">Search study spaces</span>
+        <div class="search-actions">
+          <span>Clear</span>
+          <span>Nearby</span>
+        </div>
+      </section>
+
+      <section class="info-card destination-card" aria-label="Destination details">
+        <div class="card-head-row">
+          <span class="card-badge">Route</span>
+          <span class="status-dot">●</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="row-icon">📍</span>
+          <div class="row-copy">
+            <strong>Progress Campus</strong>
+            <small>Room selection</small>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="row-icon">🧭</span>
+          <div class="row-copy">
+            <strong>Nearby route</strong>
+            <small>2 min walk • 210 m</small>
+          </div>
+        </div>
+
+        <button type="button" class="primary-action">START NAVIGATION</button>
+      </section>
+
+      <section class="info-card impact-card" aria-label="Eco impact summary">
+        <div class="impact-header">
+          <span class="leaf-badge">🌿</span>
+          <span>Eco Impact</span>
+        </div>
+
+        <ul class="impact-list">
+          <li><span class="arrow">›</span> 1,240 eco points earned</li>
+          <li><span class="arrow">›</span> 18% lower energy use</li>
+          <li><span class="arrow">›</span> 6 sustainable routes tracked</li>
+        </ul>
+      </section>
+
+      <section class="rooms-panel" aria-label="Available rooms">
+        <div class="rooms-header">
+          <h3>Study Spaces</h3>
+          <span class="count-badge">10 rooms</span>
+        </div>
+
+        <div id="room-list" class="room-grid" aria-live="polite"></div>
+      </section>
     </main>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button type="button" class="nav-item active">
+        <span class="nav-icon">🗺️</span>
+        <span>Map</span>
+      </button>
+      <button type="button" class="nav-item">
+        <span class="nav-icon">⭐</span>
+        <span>Eco-Points</span>
+      </button>
+      <button type="button" class="nav-item">
+        <span class="nav-icon">🎁</span>
+        <span>Rewards</span>
+      </button>
+      <button type="button" class="nav-item">
+        <span class="nav-icon">👤</span>
+        <span>Profile</span>
+      </button>
+    </nav>
   </div>
 
   <!-- Reservation Modal -->
