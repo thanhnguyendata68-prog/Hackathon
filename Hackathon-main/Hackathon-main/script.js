@@ -1,5 +1,7 @@
 // script.js
 
+const campusAddress = '941 Progress Ave, Scarborough, ON M1G 3T8';
+
 // Room data (used for search filtering)
 let allRooms = [];
 let currentRating = 0;
@@ -124,6 +126,16 @@ function clearSearch() {
 }
 
 function startNavigation() {
+  const locationLabel = document.querySelector('.row-copy strong');
+  if (locationLabel) {
+    locationLabel.textContent = campusAddress;
+  }
+
+  const mapLabel = document.querySelector('.map-label');
+  if (mapLabel) {
+    mapLabel.textContent = 'Campus Address';
+  }
+
   const searchInput = document.getElementById('searchInput');
   const enteredValue = searchInput ? searchInput.value.trim() : '';
 
