@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centennial Eco-Kiosk Navigation & Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="kiosk-container">
+    <header class="kiosk-header">
+      <h1>🌱 Centennial Eco-Kiosk</h1>
+      <p>Progress Campus — Real-time Room Directory & Seat Reservation</p>
+    </header>
+
+    <!-- Rooms will dynamically render here -->
+    <div id="room-list" class="room-grid"></div>
+  </div>
+
+  <!-- Reservation Modal -->
+  <div class="modal-overlay" id="reservationModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Reserve a Study Seat</h2>
+        <p class="modal-subtitle">Room Selection</p>
+      </div>
+
+      <form id="reservationForm" onsubmit="handleReservation(event)">
+        <div class="form-group">
+          <label class="form-label" for="duration">Duration</label>
+          <select class="touch-select" id="duration" required>
+            <option value="30">30 Minutes</option>
+            <option value="60" selected>1 Hour</option>
+            <option value="120">2 Hours</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="studentId">Student ID (Optional)</label>
+          <input 
+            type="text" 
+            class="touch-input" 
+            id="studentId" 
+            placeholder="e.g. 301234567" 
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-action btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-confirm">Confirm Spot</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
