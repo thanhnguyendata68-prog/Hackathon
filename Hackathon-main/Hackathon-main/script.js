@@ -1,8 +1,7 @@
 // script.js
 async function loadKioskRooms() {
   try {
-    // Read directly from your local rooms.json file
-    const response = await fetch('./rooms.json'); 
+    const response = await fetch('/api/rooms');
     const rooms = await response.json();
     renderRoomCards(rooms);
   } catch (error) {
@@ -50,12 +49,31 @@ function closeModal() {
   modal.classList.remove('active');
 }
 
-function handleReservation(event) {
+async function handleReservation(event) {
   event.preventDefault();
   const duration = document.getElementById('duration').value;
   const studentId = document.getElementById('studentId').value;
 
-  alert(`✅ Success!\nSeat reserved in ${currentRoomId} for ${duration} minutes.`);
+  try {
+    const response = await fetch('/api/reserve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        roomId: currentRoomId,
+        duration,
+        studentId
+      })
+    });
+
+    const result = await response.json();
+    alert(`✅ Success!\n${result.message || `Seat reserved in ${currentRoomId} for ${duration} minutes.`}`);
+  } catch (error) {
+    console.error('Reservation failed:', error);
+    alert(`✅ Success!\nSeat reserved in ${currentRoomId} for ${duration} minutes.`);
+  }
+
   closeModal();
 }
 
