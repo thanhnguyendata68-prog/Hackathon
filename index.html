@@ -3,21 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Touchscreen Kiosk - Reserve Seat</title>
+  <title>Centennial Eco-Kiosk Navigation & Booking</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-weight='bold' fill='%2355a933'>🌱</text></svg>" />
 </head>
 <body>
+  <div class="eco-app">
+    <header class="eco-header">
+      <div class="app-topbar">
+        <div class="brand-row" aria-label="Centennial Eco-Kiosk brand">
+          <span class="brand-icon">🌱</span>
+          <div class="brand-copy">
+            <span class="brand-title">Centennial Eco-Kiosk</span>
+            <span class="brand-version">v1</span>
+          </div>
+        </div>
+      </div>
 
-  <!-- Kiosk Room Card Trigger -->
-  <button class="kiosk-btn" onclick="openModal()">Reserve Seat in E201</button>
+      <div class="section-kicker">
+        <h2>Find a Room</h2>
+      </div>
+    </header>
+
+    <main class="eco-main">
+      <section class="map-panel" aria-label="Campus map overview">
+        <div class="map-card">
+          <div class="map-art">
+            <span class="map-pin">📍</span>
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="route route-one"></div>
+            <div class="route route-two"></div>
+          </div>
+        </div>
+        <div class="map-label">Block L</div>
+      </section>
+
+      <section class="search-bar" aria-label="Search field">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" class="search-placeholder" placeholder="Search study spaces" />
+        <div class="search-actions">
+          <span onclick="clearSearch()">Clear</span>
+          <span>Nearby</span>
+        </div>
+        <div id="searchDropdown" class="search-dropdown" aria-live="polite"></div>
+      </section>
+
+      <section class="info-card destination-card" aria-label="Destination details">
+        <div class="card-head-row">
+          <span class="card-badge">Route</span>
+          <span class="status-dot">●</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="row-icon">📍</span>
+          <div class="row-copy">
+            <strong>Progress Campus</strong>
+            <small>Room selection</small>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="row-icon">🧭</span>
+          <div class="row-copy">
+            <strong>Nearby route</strong>
+            <small>2 min walk • 210 m</small>
+          </div>
+        </div>
+
+        <button type="button" class="primary-action">START NAVIGATION</button>
+      </section>
+
+      <section class="info-card impact-card" aria-label="Eco impact summary">
+        <div class="impact-header">
+          <span class="leaf-badge">🌿</span>
+          <span>Eco Impact</span>
+        </div>
+
+        <ul class="impact-list">
+          <li><span class="arrow">›</span> 1,240 eco points earned</li>
+          <li><span class="arrow">›</span> 18% lower energy use</li>
+          <li><span class="arrow">›</span> 6 sustainable routes tracked</li>
+        </ul>
+      </section>
+
+      <section class="rooms-panel" aria-label="Available rooms">
+        <div class="rooms-header">
+          <h3>Study Spaces</h3>
+          <span class="count-badge">10 rooms</span>
+        </div>
+
+        <div id="room-list" class="room-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <button type="button" class="nav-item active" onclick="showSection('map-section')">
+        <span class="nav-icon">🗺️</span>
+        <span>Map</span>
+      </button>
+      <button type="button" class="nav-item" onclick="showSection('review-section')">
+        <span class="nav-icon">⭐</span>
+        <span>Rate & Review</span>
+      </button>
+      <button type="button" class="nav-item" onclick="showSection('profile-section')">
+        <span class="nav-icon">👤</span>
+        <span>Profile</span>
+      </button>
+    </nav>
+
+    <!-- Rate & Review Section (Hidden by default) -->
+    <div id="review-section" class="section-panel" style="display: none;">
+      <div class="section-header">
+        <h2>Rate & Review</h2>
+        <p>Share your feedback about study spaces</p>
+      </div>
+      <div class="rating-container">
+        <div class="stars-row">
+          <span class="star" data-rating="1" onclick="setRating(1)">★</span>
+          <span class="star" data-rating="2" onclick="setRating(2)">★</span>
+          <span class="star" data-rating="3" onclick="setRating(3)">★</span>
+          <span class="star" data-rating="4" onclick="setRating(4)">★</span>
+          <span class="star" data-rating="5" onclick="setRating(5)">★</span>
+        </div>
+        <p id="ratingText" class="rating-text">Select a rating</p>
+      </div>
+      <textarea id="reviewComment" class="review-textarea" placeholder="Share your thoughts about this study space..."></textarea>
+      <button type="button" class="submit-review-btn" onclick="submitReview()">Submit Review</button>
+    </div>
+
+    <!-- Profile Section (Hidden by default) -->
+    <div id="profile-section" class="section-panel" style="display: none;">
+      <div class="section-header">
+        <h2>My Profile</h2>
+      </div>
+      <div class="profile-card">
+        <div class="avatar-placeholder">👤</div>
+        <div class="profile-info">
+          <h3>Student Name</h3>
+          <p>Student ID: 301234567</p>
+          <p>Email: student@centennialcollege.ca</p>
+          <p>Eco Points: 1,240</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section (Main content) -->
+    <div id="map-section" class="section-panel"></div>
+  </div>
 
   <!-- Reservation Modal -->
   <div class="modal-overlay" id="reservationModal">
     <div class="modal-card">
-      
       <div class="modal-header">
         <h2 class="modal-title">Reserve a Study Seat</h2>
-        <p class="modal-subtitle">Room E201 — Progress Campus Library</p>
+        <p class="modal-subtitle">Room Selection</p>
       </div>
 
       <form id="reservationForm" onsubmit="handleReservation(event)">
@@ -46,44 +187,15 @@
           <button type="submit" class="btn-action btn-confirm">Confirm Spot</button>
         </div>
       </form>
-
     </div>
   </div>
 
+  <script src="script.js"></script>
   <script>
-    const modal = document.getElementById('reservationModal');
-
-    function openModal() {
-      modal.classList.add('active');
-    }
-
-    function closeModal() {
-      modal.classList.remove('active');
-    }
-
-    function handleReservation(event) {
-      event.preventDefault();
-      
-      const duration = document.getElementById('duration').value;
-      const studentId = document.getElementById('studentId').value;
-
-      // Send payload via Fetch API to Member 1's backend endpoint
-      /*
-      fetch('http://localhost:8080/api/reserve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          roomId: 'E201',
-          durationMinutes: parseInt(duration),
-          studentId: studentId || null
-        })
-      });
-      */
-
-      alert(`Seat Reserved in Room E201 for ${duration} minutes!`);
-      closeModal();
-    }
+    // Initialize sections on load
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeSearch();
+    });
   </script>
-
 </body>
 </html>
