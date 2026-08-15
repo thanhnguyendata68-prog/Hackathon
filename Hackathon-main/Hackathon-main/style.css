@@ -604,6 +604,208 @@ button {
   color: #fff;
 }
 
+/* ========== SEARCH DROPDOWN STYLES ========== */
+.search-bar {
+  position: relative;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--eco-card);
+  border: 1px solid var(--eco-line);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 8px 18px rgba(47, 111, 62, 0.1);
+}
+
+.dropdown-item {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(200, 216, 201, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(85, 169, 51, 0.08);
+}
+
+.dropdown-item strong {
+  font-size: 0.88rem;
+  color: var(--eco-text);
+}
+
+.dropdown-item small {
+  font-size: 0.75rem;
+  color: var(--eco-subtle);
+}
+
+.dropdown-item.no-results {
+  text-align: center;
+  color: var(--eco-subtle);
+  font-size: 0.82rem;
+}
+
+/* ========== SECTION PANELS STYLES ========== */
+.section-panel {
+  padding: 20px 18px 80px;
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0 0 8px;
+  color: var(--eco-green);
+  font-size: 1.5rem;
+}
+
+.section-header p {
+  margin: 0;
+  color: var(--eco-subtle);
+  font-size: 0.9rem;
+}
+
+/* ========== RATING COMPONENT STYLES ========== */
+.rating-container {
+  background: var(--eco-card);
+  border: 1px solid var(--eco-line);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.star {
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: #ddd;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.star:hover {
+  color: var(--eco-leaf);
+  transform: scale(1.1);
+}
+
+.star.active {
+  color: var(--eco-leaf);
+}
+
+.rating-text {
+  margin: 0;
+  color: var(--eco-subtle);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ========== REVIEW TEXTAREA STYLES ========== */
+.review-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid var(--eco-line);
+  border-radius: 12px;
+  background: #f8faf8;
+  color: var(--eco-text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+.review-textarea:focus {
+  border-color: var(--eco-green);
+  box-shadow: 0 0 0 3px rgba(47, 111, 62, 0.12);
+}
+
+.review-textarea::placeholder {
+  color: rgba(31, 41, 55, 0.5);
+}
+
+/* ========== REVIEW SUBMIT BUTTON ========== */
+.submit-review-btn {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(180deg, var(--eco-green) 0%, var(--eco-green-strong) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.submit-review-btn:active {
+  transform: scale(0.98);
+}
+
+/* ========== PROFILE CARD STYLES ========== */
+.profile-card {
+  background: var(--eco-card);
+  border: 1px solid var(--eco-line);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: 50%;
+  background: rgba(85, 169, 51, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.profile-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: var(--eco-text);
+}
+
+.profile-info p {
+  margin: 6px 0;
+  font-size: 0.85rem;
+  color: var(--eco-subtle);
+}
+
+/* ========== NAVIGATION BAR UPDATES ========== */
+.bottom-nav {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 @media (min-width: 680px) {
   body {
     padding: 24px 0 40px;

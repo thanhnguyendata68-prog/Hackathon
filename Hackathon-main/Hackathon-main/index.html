@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Centennial Eco-Kiosk Navigation & Booking</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-weight='bold' fill='%2355a933'>🌱</text></svg>" />
 </head>
 <body>
   <div class="eco-app">
@@ -41,11 +42,12 @@
 
       <section class="search-bar" aria-label="Search field">
         <span class="search-icon">⌕</span>
-        <span class="search-placeholder">Search study spaces</span>
+        <input type="text" id="searchInput" class="search-placeholder" placeholder="Search study spaces" />
         <div class="search-actions">
-          <span>Clear</span>
+          <span onclick="clearSearch()">Clear</span>
           <span>Nearby</span>
         </div>
+        <div id="searchDropdown" class="search-dropdown" aria-live="polite"></div>
       </section>
 
       <section class="info-card destination-card" aria-label="Destination details">
@@ -97,23 +99,58 @@
     </main>
 
     <nav class="bottom-nav" aria-label="Bottom navigation">
-      <button type="button" class="nav-item active">
+      <button type="button" class="nav-item active" onclick="showSection('map-section')">
         <span class="nav-icon">🗺️</span>
         <span>Map</span>
       </button>
-      <button type="button" class="nav-item">
+      <button type="button" class="nav-item" onclick="showSection('review-section')">
         <span class="nav-icon">⭐</span>
-        <span>Eco-Points</span>
+        <span>Rate & Review</span>
       </button>
-      <button type="button" class="nav-item">
-        <span class="nav-icon">🎁</span>
-        <span>Rewards</span>
-      </button>
-      <button type="button" class="nav-item">
+      <button type="button" class="nav-item" onclick="showSection('profile-section')">
         <span class="nav-icon">👤</span>
         <span>Profile</span>
       </button>
     </nav>
+
+    <!-- Rate & Review Section (Hidden by default) -->
+    <div id="review-section" class="section-panel" style="display: none;">
+      <div class="section-header">
+        <h2>Rate & Review</h2>
+        <p>Share your feedback about study spaces</p>
+      </div>
+      <div class="rating-container">
+        <div class="stars-row">
+          <span class="star" data-rating="1" onclick="setRating(1)">★</span>
+          <span class="star" data-rating="2" onclick="setRating(2)">★</span>
+          <span class="star" data-rating="3" onclick="setRating(3)">★</span>
+          <span class="star" data-rating="4" onclick="setRating(4)">★</span>
+          <span class="star" data-rating="5" onclick="setRating(5)">★</span>
+        </div>
+        <p id="ratingText" class="rating-text">Select a rating</p>
+      </div>
+      <textarea id="reviewComment" class="review-textarea" placeholder="Share your thoughts about this study space..."></textarea>
+      <button type="button" class="submit-review-btn" onclick="submitReview()">Submit Review</button>
+    </div>
+
+    <!-- Profile Section (Hidden by default) -->
+    <div id="profile-section" class="section-panel" style="display: none;">
+      <div class="section-header">
+        <h2>My Profile</h2>
+      </div>
+      <div class="profile-card">
+        <div class="avatar-placeholder">👤</div>
+        <div class="profile-info">
+          <h3>Student Name</h3>
+          <p>Student ID: 301234567</p>
+          <p>Email: student@centennialcollege.ca</p>
+          <p>Eco Points: 1,240</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section (Main content) -->
+    <div id="map-section" class="section-panel"></div>
   </div>
 
   <!-- Reservation Modal -->
@@ -154,5 +191,11 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Initialize sections on load
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeSearch();
+    });
+  </script>
 </body>
 </html>
