@@ -17,4 +17,4 @@ Below is the structural operational interface mapping for our low-energy green c
 
 Use code with caution.+-------------------------------------------------+|      CENTENNIAL ECO-WAYFINDER MOBILE v2.5       |+-------------------------------------------------+|  Search Room [✔️]   View Eco-Points [✔️]  Exit    |+-------------------------------------------------+| 👉 ENTER ROOM CODE (or type 'EXIT'): L208       ||                                                 || 📍 DESTINATION: Room L208                       || 🗺️  DIRECTIONS : Block L, 2nd Floor.             ||                                                 || 🌱 ENVIRONMENTAL FOOTPRINT IMPACT:              ||  » Landfill Waste Saved : +1 Map Document       ||  » CO2 Avoided          : 0.015 kg              ||  » Loyalty Reward       : +50 Eco-Points        |+-------------------------------------------------+
 
-https://vocal-begonia-529a34.netlify.app/
+https://melodic-flan-667f45.netlify.app/
