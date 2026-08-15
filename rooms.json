@@ -1,0 +1,102 @@
+[
+  {
+    "id": "A2-01",
+    "building": "Progress - A Block",
+    "name": "Quiet Study Pod A1",
+    "noiseLevel": "Quiet",
+    "totalSeats": 8,
+    "occupiedSeats": 2,
+    "hasOutlets": true,
+    "floor": 2
+  },
+  {
+    "id": "A2-87",
+    "building": "Progress - A Block",
+    "name": "Multi-Faith & Reflection Space",
+    "noiseLevel": "Silent",
+    "totalSeats": 12,
+    "occupiedSeats": 3,
+    "hasOutlets": false,
+    "floor": 2
+  },
+  {
+    "id": "B1-16",
+    "building": "Progress - B Block",
+    "name": "Student Rest Lounge",
+    "noiseLevel": "Silent",
+    "totalSeats": 10,
+    "occupiedSeats": 4,
+    "hasOutlets": true,
+    "floor": 1
+  },
+  {
+    "id": "C1-02",
+    "building": "Progress - C Block",
+    "name": "Student Association Hub (CCSAI)",
+    "noiseLevel": "Lively",
+    "totalSeats": 30,
+    "occupiedSeats": 15,
+    "hasOutlets": true,
+    "floor": 1
+  },
+  {
+    "id": "D1-15",
+    "building": "Progress - D Block",
+    "name": "Software & Tech Open Lab",
+    "noiseLevel": "Moderate",
+    "totalSeats": 32,
+    "occupiedSeats": 20,
+    "hasOutlets": true,
+    "floor": 1
+  },
+  {
+    "id": "E2-01",
+    "building": "Progress - E Block",
+    "name": "Lecture Hall & Breakout E201",
+    "noiseLevel": "Moderate",
+    "totalSeats": 45,
+    "occupiedSeats": 12,
+    "hasOutlets": true,
+    "floor": 2
+  },
+  {
+    "id": "E1-29",
+    "building": "Progress - E Block",
+    "name": "Collaborative Study Area",
+    "noiseLevel": "Moderate",
+    "totalSeats": 18,
+    "occupiedSeats": 8,
+    "hasOutlets": true,
+    "floor": 1
+  },
+  {
+    "id": "L2-06",
+    "building": "Progress - L Block (Library)",
+    "name": "Library Silent Study Zone (2nd Floor)",
+    "noiseLevel": "Silent",
+    "totalSeats": 40,
+    "occupiedSeats": 28,
+    "hasOutlets": true,
+    "floor": 2
+  },
+  {
+    "id": "L2-18",
+    "building": "Progress - L Block (Library)",
+    "name": "Group Study Room L218",
+    "noiseLevel": "Moderate",
+    "totalSeats": 6,
+    "occupiedSeats": 6,
+    "hasOutlets": true,
+    "floor": 2
+  },
+  {
+    "id": "L1-03",
+    "building": "Progress - L Block (Library)",
+    "name": "Fireside Lounge & Open Study",
+    "noiseLevel": "Moderate",
+    "totalSeats": 25,
+    "occupiedSeats": 14,
+    "hasOutlets": true,
+    "floor": 1
+  }
+]
