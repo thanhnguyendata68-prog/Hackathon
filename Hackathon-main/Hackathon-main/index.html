@@ -43,10 +43,6 @@
       <section class="search-bar" aria-label="Search field">
         <span class="search-icon">⌕</span>
         <input type="text" id="searchInput" class="search-placeholder" placeholder="Search study spaces" />
-        <div class="search-actions">
-          <span onclick="clearSearch()">Clear</span>
-          <span>Nearby</span>
-        </div>
         <div id="searchDropdown" class="search-dropdown" aria-live="polite"></div>
       </section>
 
@@ -72,7 +68,7 @@
           </div>
         </div>
 
-        <button type="button" class="primary-action">START NAVIGATION</button>
+        <button type="button" class="primary-action" onclick="startNavigation()">START NAVIGATION</button>
       </section>
 
       <section class="info-card impact-card" aria-label="Eco impact summary">

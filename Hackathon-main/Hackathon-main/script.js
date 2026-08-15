@@ -6,18 +6,19 @@ let currentRating = 0;
 
 async function loadKioskRooms() {
   try {
-<<<<<<< HEAD
     const response = await fetch('/api/rooms');
-    const rooms = await response.json();
-    renderRoomCards(rooms);
-=======
-    // Read directly from your local rooms.json file
-    const response = await fetch('./rooms.json'); 
     allRooms = await response.json();
     renderRoomCards(allRooms);
->>>>>>> d0ac6adf474874f6ea9ac38c8fe4367ae6d223ab
   } catch (error) {
-    console.error('Error fetching room data:', error);
+    console.error('API room data fetch failed:', error);
+
+    try {
+      const fallbackResponse = await fetch('./rooms.json');
+      allRooms = await fallbackResponse.json();
+      renderRoomCards(allRooms);
+    } catch (fallbackError) {
+      console.error('Local room data fetch failed:', fallbackError);
+    }
   }
 }
 
@@ -53,36 +54,54 @@ function initializeSearch() {
   }
 }
 
-function filterRooms(event) {
-  const query = event.target.value.toLowerCase().trim();
+async function filterRooms(event) {
+  const query = event.target.value.trim();
   const dropdown = document.getElementById('searchDropdown');
-  
+
   if (!query) {
     dropdown.innerHTML = '';
     dropdown.style.display = 'none';
     return;
   }
 
-  // Filter rooms based on query
-  const filtered = allRooms.filter(room => 
-    room.name.toLowerCase().includes(query) ||
-    room.building.toLowerCase().includes(query) ||
-    room.noiseLevel.toLowerCase().includes(query) ||
-    room.id.toLowerCase().includes(query)
-  );
+  try {
+    const response = await fetch(`/api/rooms/search?q=${encodeURIComponent(query)}`);
+    const filtered = await response.json();
 
-  // Render dropdown results
-  if (filtered.length > 0) {
-    dropdown.innerHTML = filtered.map(room => `
-      <div class="dropdown-item" onclick="selectSearchResult('${room.id}', '${room.name}')">
-        <strong>${room.name}</strong>
-        <small>${room.building} • ${room.noiseLevel}</small>
-      </div>
-    `).join('');
-    dropdown.style.display = 'block';
-  } else {
-    dropdown.innerHTML = '<div class="dropdown-item no-results">No study spaces found</div>';
-    dropdown.style.display = 'block';
+    if (filtered.length > 0) {
+      dropdown.innerHTML = filtered.map(room => `
+        <div class="dropdown-item" onclick="selectSearchResult('${room.id}', '${room.name}')">
+          <strong>${room.name}</strong>
+          <small>${room.building} • ${room.noiseLevel}</small>
+        </div>
+      `).join('');
+      dropdown.style.display = 'block';
+    } else {
+      dropdown.innerHTML = '<div class="dropdown-item no-results">No study spaces found</div>';
+      dropdown.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Search API failed:', error);
+
+    const filtered = allRooms.filter(room => 
+      room.name.toLowerCase().includes(query.toLowerCase()) ||
+      room.building.toLowerCase().includes(query.toLowerCase()) ||
+      room.noiseLevel.toLowerCase().includes(query.toLowerCase()) ||
+      room.id.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filtered.length > 0) {
+      dropdown.innerHTML = filtered.map(room => `
+        <div class="dropdown-item" onclick="selectSearchResult('${room.id}', '${room.name}')">
+          <strong>${room.name}</strong>
+          <small>${room.building} • ${room.noiseLevel}</small>
+        </div>
+      `).join('');
+      dropdown.style.display = 'block';
+    } else {
+      dropdown.innerHTML = '<div class="dropdown-item no-results">No study spaces found</div>';
+      dropdown.style.display = 'block';
+    }
   }
 }
 
@@ -95,36 +114,62 @@ function selectSearchResult(roomId, roomName) {
 
 function clearSearch() {
   const searchInput = document.getElementById('searchInput');
-  searchInput.value = '';
-  document.getElementById('searchDropdown').style.display = 'none';
+  if (searchInput) {
+    searchInput.value = '';
+  }
+  const dropdown = document.getElementById('searchDropdown');
+  if (dropdown) {
+    dropdown.style.display = 'none';
+  }
+}
+
+function startNavigation() {
+  const searchInput = document.getElementById('searchInput');
+  const enteredValue = searchInput ? searchInput.value.trim() : '';
+
+  let match = null;
+
+  if (enteredValue) {
+    const query = enteredValue.toLowerCase();
+    match = allRooms.find(room =>
+      room.name.toLowerCase().includes(query) ||
+      room.building.toLowerCase().includes(query) ||
+      room.noiseLevel.toLowerCase().includes(query) ||
+      room.id.toLowerCase().includes(query)
+    );
+  }
+
+  if (!match && allRooms.length > 0) {
+    match = allRooms[0];
+  }
+
+  if (match) {
+    openReservationModal(match.id, match.name);
+    return;
+  }
+
+  alert('No study space is available right now.');
 }
 
 // ========== NAVIGATION FUNCTIONALITY ==========
-function showSection(sectionId) {
-  // Hide all sections
+function showSection(sectionId, event) {
   document.querySelectorAll('.section-panel').forEach(section => {
     section.style.display = 'none';
   });
-  
-  // Remove active class from all nav items
+
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
   });
-  
-  // Show selected section
+
   const selectedSection = document.getElementById(sectionId);
   if (selectedSection) {
     selectedSection.style.display = 'block';
   }
-  
-  // Add active class to clicked nav item
-  event.target.closest('.nav-item').classList.add('active');
-  
-  // Move map section content if needed
-  if (sectionId === 'map-section') {
-    const mainContent = document.querySelector('.eco-main');
-    if (mainContent && !document.getElementById('map-section').contains(mainContent)) {
-      // Content is already in place from original HTML
+
+  if (event && event.target && event.target.closest) {
+    const navItem = event.target.closest('.nav-item');
+    if (navItem) {
+      navItem.classList.add('active');
     }
   }
 }

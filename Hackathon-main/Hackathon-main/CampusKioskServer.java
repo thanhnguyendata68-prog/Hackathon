@@ -30,6 +30,29 @@ public class CampusKioskServer {
             sendJson(exchange, 200, json);
         });
 
+        server.createContext("/api/rooms/search", exchange -> {
+            if (!"GET".equalsIgnoreCase(exchange.getRequestMethod())) {
+                sendJson(exchange, 405, "{\"error\":\"Method not allowed\"}");
+                return;
+            }
+
+            String query = exchange.getRequestURI().getRawQuery();
+            String searchTerm = "";
+            if (query != null && query.toLowerCase().startsWith("q=")) {
+                searchTerm = java.net.URLDecoder.decode(query.substring(2), StandardCharsets.UTF_8);
+            }
+
+            String roomsJson = Files.readString(ROOT.resolve("rooms.json"), StandardCharsets.UTF_8);
+            String filteredJson = roomsJson;
+
+            if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+                String normalized = searchTerm.trim().toLowerCase();
+                filteredJson = filterRoomsJson(roomsJson, normalized);
+            }
+
+            sendJson(exchange, 200, filteredJson);
+        });
+
         server.createContext("/api/reserve", exchange -> {
             if (!"POST".equalsIgnoreCase(exchange.getRequestMethod())) {
                 sendJson(exchange, 405, "{\"error\":\"Method not allowed\"}");
@@ -56,6 +79,26 @@ public class CampusKioskServer {
         server.start();
 
         System.out.println("Campus kiosk Java backend is running on http://localhost:" + PORT);
+    }
+
+    private static String filterRoomsJson(String roomsJson, String query) {
+        String[] items = roomsJson.replace("[", "").replace("]", "").split("\\},\\s*\\{");
+        StringBuilder result = new StringBuilder("[");
+        boolean hasMatch = false;
+
+        for (String item : items) {
+            String normalizedItem = item.replace("{", "").replace("}", "");
+            String lower = normalizedItem.toLowerCase();
+
+            if (lower.contains(query)) {
+                if (hasMatch) result.append(",");
+                result.append("{").append(normalizedItem).append("}");
+                hasMatch = true;
+            }
+        }
+
+        result.append("]");
+        return result.toString();
     }
 
     private static void sendJson(HttpExchange exchange, int statusCode, String jsonBody) throws IOException {

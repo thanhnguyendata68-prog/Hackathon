@@ -241,17 +241,15 @@ button {
 .search-placeholder {
   flex: 1;
   min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
   color: rgba(31, 41, 55, 0.7);
   font-size: 0.92rem;
 }
 
-.search-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.72rem;
-  color: var(--eco-green);
-  font-weight: 700;
+.search-placeholder::placeholder {
+  color: rgba(31, 41, 55, 0.55);
 }
 
 .info-card {
